@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ClienteMovil.Views.EditarView" BackgroundColor="#8ec399" Title="Modificar vuelo">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="update.png"
+                     Command="{Binding GuardarCommand }"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+   
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition/>
+            <ColumnDefinition  Width="20"/>
+        </Grid.ColumnDefinitions>
+
+
+        <Frame Grid.Row="1" Grid.Column="1" HasShadow="True" CornerRadius="20"  BackgroundColor="White">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="18"/>
+                    <RowDefinition  Height="40" />
+                    <RowDefinition Height="18"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="18"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="18"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="135"/>
+                </Grid.RowDefinitions>
+                <Label TextColor="Black" FontAttributes="Bold">Codigo de Vuelo:</Label>
+                <Entry MaxLength="6" IsReadOnly="True" Text="{Binding Vuelo.CodigoVuelo}" Grid.Row="1"></Entry>
+                <Label TextColor="Black" FontAttributes="Bold"  Grid.Row="2">Destino:</Label>
+                <Entry MaxLength="25" Text="{Binding Vuelo.Destino}" Grid.Row="3"></Entry>
+                <Label TextColor="Black" FontAttributes="Bold" Grid.Row="4">Fecha del vuelo</Label>
+                <DatePicker Date="{Binding Date}" Grid.Row="5"></DatePicker>
+                <Label TextColor="Black" FontAttributes="Bold" Grid.Row="4" Grid.Column="1">Hora del vuelo</Label>
+                <TimePicker Grid.Row="5" Grid.Column="1" Time="{Binding Time}"></TimePicker>
+                <Label TextColor="Black" FontAttributes="Bold" Grid.Row="6"  Text="Puerta de salida"/>
+                <Picker Grid.Row="7" Title="Selecciona la puerta de abordaje" Grid.ColumnSpan="2"  SelectedItem="{Binding Vuelo.PuertaSalida}">
+                    <Picker.Items>
+                        <x:String>PTA01</x:String>
+                        <x:String>PTA02</x:String>
+                        <x:String>PTA03</x:String>
+                        <x:String>PTA04</x:String>
+                        <x:String>PTA05</x:String>
+                        <x:String>PTA06</x:String>
+                        <x:String>PTA07</x:String>
+                        <x:String>PTA08</x:String>
+                        <x:String>PTA09</x:String>
+                        <x:String>PTA10</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Label HorizontalOptions="Center"
+                       TextColor="Red"
+                       Text="{Binding Errores}"
+                       LineBreakMode="WordWrap"
+                       HorizontalTextAlignment="Center"
+                       IsEnabled="False"
+                       Grid.Row="8"
+                       Grid.ColumnSpan="2">
+
+                </Label>
+                <Frame Margin="0,70,0,0" BackgroundColor="#2e2f31" Grid.Row="8" Grid.ColumnSpan="2" CornerRadius="25">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GuardarCommand }"></TapGestureRecognizer>
+                    </Frame.GestureRecognizers>
+                    <Label TextColor="White" FontAttributes="Bold" HorizontalTextAlignment="Center" FontSize="20">Editar Vuelo</Label>
+                </Frame>
+            </Grid>
+        </Frame>
+
+
+    </Grid>
+</ContentPage>

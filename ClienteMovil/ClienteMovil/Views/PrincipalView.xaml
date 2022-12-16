@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage  xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ClienteMovil.Views.PrincipalView"  Title="Salidas"
+             xmlns:vm="clr-namespace:ClienteMovil.ViewModel" >
+    <ContentPage.BindingContext>
+        <vm:VuelosViewModel x:Name="vue"></vm:VuelosViewModel>
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+
+        <ToolbarItem IconImageSource="mas" Command="{Binding VistaAgregarCommand}" ></ToolbarItem>
+        <ToolbarItem IconImageSource="refresh" Command="{Binding ActualizarCommand}"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+
+    <Frame BackgroundColor="#8ec399" >
+            <CollectionView Margin="0,0,0,0" ItemsSource="{Binding Vuelos}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="1" VerticalItemSpacing="10"/>
+                </CollectionView.ItemsLayout> 
+                <CollectionView.ItemTemplate >
+                    <DataTemplate>
+                        <Frame CornerRadius="25">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="142"/>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="16"/>
+                                    <RowDefinition Height="50"/>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="50"/>
+                                </Grid.RowDefinitions>
+
+
+                                <Label FontSize="17" TextTransform="Uppercase"   HorizontalOptions="Center" VerticalOptions="Center" TextColor="#5fb1a9" Text="{Binding CodigoVuelo}"></Label>
+                                <Label FontSize="17" TextTransform="Uppercase"  HorizontalOptions="Center" VerticalOptions="Center" TextColor="#5fb1a9" Text="{Binding Destino}" Grid.Column="2"></Label>
+                                <Label FontSize="15" VerticalOptions="Center" HorizontalTextAlignment="Center" Grid.Row="1" >Fecha y Hora</Label>
+                                <Label FontSize="16"  VerticalOptions="Center" TextColor="Black" Grid.Row="2" Text="{Binding HorarioSalida,StringFormat='{}{0:MM/dd/yy h:mm tt}'}"></Label>
+                                <Label FontSize="15" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="1" Grid.Column="2" >Puerta</Label>
+                                <Label FontSize="17" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Black" Text="{Binding PuertaSalida}" Grid.Column="2" Grid.Row="2"></Label>
+                                <Image Source="Progreso" Grid.Row="3" Grid.ColumnSpan="3"></Image>
+                                <Label FontSize="20" TextColor="#dc7973" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Estado}" Grid.Row="4"></Label>
+                                <Image  Grid.Column="1" Grid.Row="4" Scale=".6"   Source="editar">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference vue}, Path=EditarCommand}" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <Image Grid.Column="2" Grid.Row="4" Scale=".7"   Source="eliminar">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference vue}, Path=ConfirmarCommand}" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                    </Image.GestureRecognizers>
+                                </Image>
+
+                            </Grid>
+                         
+                        </Frame>
+                    </DataTemplate>
+                    
+                </CollectionView.ItemTemplate>
+        </CollectionView>
+        </Frame>
+    
+        
+</ContentPage>
